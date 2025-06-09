@@ -1,5 +1,6 @@
 using System;
 using BepInEx;
+using Photon.Pun;
 using TMPro;
 
 namespace GorillaPlayerIDDisplay
@@ -10,19 +11,18 @@ namespace GorillaPlayerIDDisplay
 
         void Start()
         {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable()
+            {
+                {
+                    PluginInfo.Name,
+                    PluginInfo.Version
+                }
+            }, null, null);
             Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
-        }
-
-        internal class PluginInfo
-        {
-            public const string GUID = "com.BP15.GorillaPlayerIDDisplay";
-            public const string Name = "GorillaPlayerIDDisplay";
-            public const string Version = "1.0.0";
         }
 
         private void Update()
         {
-            // Show IDs for all other players
             foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
             {
                 if (vrrig == null || vrrig.isOfflineVRRig) continue;
