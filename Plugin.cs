@@ -4,9 +4,22 @@ using TMPro;
 
 namespace GorillaPlayerIDDisplay
 {
-    [BepInPlugin("com.BP15.gorillatag.ShowPlayerIDs", "Player ID Display", "1.0.0")]
+    [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class PlayerIDDisplay : BaseUnityPlugin
     {
+
+        void Start()
+        {
+            Logger.LogInfo($"Plugin {PluginInfo.GUID} is loaded!");
+        }
+
+        internal class PluginInfo
+        {
+            public const string GUID = "com.BP15.GorillaPlayerIDDisplay";
+            public const string Name = "GorillaPlayerIDDisplay";
+            public const string Version = "1.0.0";
+        }
+
         private void Update()
         {
             // Show IDs for all other players
